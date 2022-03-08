@@ -43,16 +43,33 @@ public class BancoCliente {
         BancoCliente.clientes.stream().filter(cliente -> Objects.equals(cliente.getId(),id))
                 .forEach(cliente -> {
                     Optional<Conta> resultConta = cliente.getContas().stream().filter(conta -> Objects.equals(conta.getId(),requestDeposito.getConta())).findAny();
-                   if(resultConta.isPresent()) {
-                       Double novoSaldo = resultConta.get().getSaldo() + requestDeposito.getValor();
-                       resultConta.get().setSaldo(novoSaldo);
-                   } else {
-                       try {
-                           throw new Exception("Conta não encontrada");
-                       } catch (Exception e) {
-                           e.printStackTrace();
-                       }
-                   }
+                    if(resultConta.isPresent()) {
+                        Double novoSaldo = resultConta.get().getSaldo() + requestDeposito.getValor();
+                        resultConta.get().setSaldo(novoSaldo);
+                    } else {
+                        try {
+                            throw new Exception("Conta não encontrada");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    public void saque(UUID id, RequestDeposito requestDeposito) throws Exception{
+        BancoCliente.clientes.stream().filter(cliente -> Objects.equals(cliente.getId(),id))
+                .forEach(cliente -> {
+                    Optional<Conta> resultConta = cliente.getContas().stream().filter(conta -> Objects.equals(conta.getId(),requestDeposito.getConta())).findAny();
+                    if(resultConta.isPresent()) {
+                        Double novoSaldo = resultConta.get().getSaldo() + requestDeposito.getValor();
+                        resultConta.get().setSaldo(novoSaldo);
+                    } else {
+                        try {
+                            throw new Exception("Conta não encontrada");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 });
     }
 
