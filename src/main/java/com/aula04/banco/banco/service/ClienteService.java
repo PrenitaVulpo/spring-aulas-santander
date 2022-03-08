@@ -40,4 +40,8 @@ public class ClienteService {
     public Cliente detalhesCliente(UUID id) throws Exception {
         return BancoAula04Application.bancoCliente.detalhesCliente(id);
     }
+
+    public Cliente atualizaCliente(UUID id, RequestCliente requestCliente) throws Exception{
+        return BancoAula04Application.bancoCliente.atualizaCliente(id, requestCliente);
+    }
 }

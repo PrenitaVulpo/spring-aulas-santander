@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ClienteServiceTest {
 
@@ -35,7 +38,7 @@ public class ClienteServiceTest {
     }
 
     @Test
-    public void atualizaCliente(){
+    public void atualizaCliente() throws Exception {
         RequestCliente resquestCliente = new RequestCliente(
                 "teste",
                 "teste@teste.com",
@@ -51,7 +54,27 @@ public class ClienteServiceTest {
                 "teste@teste.com",
                 "12345678900",
                 "1212121212121",
+                3
+        );
 
-        )
+        Cliente clienteAtualizado = clienteService.atualizaCliente(cliente.getId(), requestClienteAtualiza);
+
+        Assertions.assertEquals(resquestCliente.getNome(), clienteAtualizado.getNome());
+    }
+
+    @Test
+    public void buscaClienteNaoExistente(){
+        UUID uuid = UUID.randomUUID();
+        Assertions.assertThrows(Exception.class, () -> clienteService.detalhesCliente(uuid));
+    }
+
+    @Test
+    public void buscaClienteNaoExistente2(){
+        UUID uuid = UUID.randomUUID();
+
+        try{
+            clienteService.detalhesCliente(uuid);
+            fail("Não lançou a exceção");
+        } catch(Exception e){};
     }
 }
