@@ -2,6 +2,7 @@ package com.aula04.banco.banco.controller;
 
 import com.aula04.banco.banco.BancoAula04Application;
 import com.aula04.banco.banco.dto.RequestDeposito;
+import com.aula04.banco.banco.dto.RequestSaque;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +25,9 @@ public class OperacoesController {
     @PatchMapping("/saque")
     public ResponseEntity saque(
             @RequestHeader("id") UUID id,
-            @RequestBody RequestDeposito requestDeposito
+            @RequestBody RequestSaque requestSaque
     ) throws Exception {
-        BancoAula04Application.bancoCliente.deposita(id, requestDeposito);
+        BancoAula04Application.bancoCliente.saque(id, requestSaque);
         return ResponseEntity.ok().build();
     }
 }
