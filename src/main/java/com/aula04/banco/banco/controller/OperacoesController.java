@@ -20,4 +20,13 @@ public class OperacoesController {
         BancoAula04Application.bancoCliente.deposita(id, requestDeposito);
         return ResponseEntity.ok().build();
     }
+
+    @PatchMapping("/saque")
+    public ResponseEntity saque(
+            @RequestHeader("id") UUID id,
+            @RequestBody RequestDeposito requestDeposito
+    ) throws Exception {
+        BancoAula04Application.bancoCliente.deposita(id, requestDeposito);
+        return ResponseEntity.ok().build();
+    }
 }
