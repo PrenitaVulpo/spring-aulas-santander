@@ -12,7 +12,7 @@ public class CPFValidator implements ConstraintValidator<CPF, String> {
 
     @Override
     public boolean isValid(String cpf, ConstraintValidatorContext context) {
-        String cpfSomenteDigitos = cpf.replaceAll("//D", "");
+        String cpfSomenteDigitos = cpf.replaceAll("\\D", "");
 
         if(cpfSomenteDigitos == null
             || cpfSomenteDigitos.length() != 11
